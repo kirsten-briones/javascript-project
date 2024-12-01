@@ -76,7 +76,6 @@ const renderTodoList = async ()  => {
         checkbox.setAttribute('type', 'checkbox')
         checkbox.checked = item.completed
         checkbox.addEventListener('click', async (e) => {
-            console.log('lyka', item._id, e.target.checked) 
             document.getElementById(`todo-item-${item._id}`).style.textDecoration = e.target.checked ? 'line-through' : ''
             await finishTodo(item._id, e.target.checked) 
             renderTodoList()
@@ -85,7 +84,6 @@ const renderTodoList = async ()  => {
         button.classList.add('btn-close')
         button.classList.add('float-end')
         button.addEventListener('click', async (e) => {
-            console.log(item, 'lyka')
             if (item.completed) {
                 await deleteTodo(item._id)
                 renderTodoList()
