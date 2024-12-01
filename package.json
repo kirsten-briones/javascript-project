@@ -1,0 +1,29 @@
+{
+  "name": "todo-app",
+  "version": "1.0.0",
+  "description": "my todo app",
+  "main": "index.js",
+ "scripts": {
+    "start": "webpack serve",
+    "build": "webpack build --mode=production",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kirsten Briones",
+  "license": "ISC",
+  "dependencies": {
+    "@popperjs/core": "^2.11.8",
+    "bootstrap": "^5.3.3"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "css-loader": "^7.1.2",
+    "html-webpack-plugin": "^5.6.3",
+    "postcss-loader": "^8.1.1",
+    "sass": "^1.81.0",
+    "sass-loader": "^16.0.3",
+    "style-loader": "^4.0.0",
+    "webpack": "^5.96.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.1.0"
+  }
+}

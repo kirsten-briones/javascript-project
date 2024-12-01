@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap w/ Webpack</title>
+  </head>
+  <body>
+    <div class="container py-4 px-3 mx-auto">
+      <h1>To Do</h1>
+      <div id="alert-message" class="d-none alert alert-dismissible fade show" role="alert">
+        <span id="alert-message-text"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+ 
+      <form id="todo-form">
+        <div class="input-group mb-3">
+            <input id="todo-text" type="text" class="form-control" placeholder="Title" aria-label="Title" aria-describedby="basic-addon1">
+          </div>
+          <button class="btn btn-primary" id="add-button">Add</button>
+        </div>    
+      </form>
+      <ul id="todo-list" class="list-group mb-3">
+
+      </ul>
+    </div>
+
+  </body>
+</html>
