@@ -1,5 +1,6 @@
 // Import our custom CSS
 import '../scss/styles.scss'
+import * as bootstrap from 'bootstrap'
 const apiURL = 'https://js1-todo-api.vercel.app/api/todos'
 const apiKey = '47b35a3a-87c6-4fef-bdeb-a4cb2b91d23d'
 
@@ -38,8 +39,8 @@ const deleteTodo = async (id) => {
     }) 
 }
 
-const finishTodo =  (id, completed) => {
-    fetch(`${apiURL}/${id}?apikey=${apiKey}`,  {
+const finishTodo =  async (id, completed) => {
+    await fetch(`${apiURL}/${id}?apikey=${apiKey}`,  {
         method: 'PUT',
         body: JSON.stringify({
             completed
@@ -49,6 +50,12 @@ const finishTodo =  (id, completed) => {
         } 
     })  
 } 
+
+const openModal = () => {
+    const modalElement = document.getElementById('delete-modal')
+    const modalInstance = new bootstrap.Modal(modalElement)
+    modalInstance.show()
+}
 
 const renderTodoList = async ()  => {
     const todos = await getTodos()
@@ -62,19 +69,30 @@ const renderTodoList = async ()  => {
         const span = document.createElement('span')
         li.classList.add('list-group-item')
         span.setAttribute('id', `todo-item-${item._id}`)
+        span.classList.add('px-3')
         span.appendChild(document.createTextNode(item.title))
+        span.style.display = 'inline-block'
         span.style.textDecoration = item.completed ? 'line-through' : ''
         checkbox.setAttribute('type', 'checkbox')
-        checkbox.addEventListener('click', (e) => {
+        checkbox.checked = item.completed
+        checkbox.addEventListener('click', async (e) => {
             console.log('lyka', item._id, e.target.checked) 
-            finishTodo(item._id, e.target.checked) 
             document.getElementById(`todo-item-${item._id}`).style.textDecoration = e.target.checked ? 'line-through' : ''
+            await finishTodo(item._id, e.target.checked) 
+            renderTodoList()
+
         })
         button.classList.add('btn-close')
+        button.classList.add('float-end')
         button.addEventListener('click', async (e) => {
             console.log(item, 'lyka')
-            await deleteTodo(item._id)
-            renderTodoList()
+            if (item.completed) {
+                await deleteTodo(item._id)
+                renderTodoList()
+            } else {
+                openModal()
+            }
+
         })
         li.appendChild(checkbox)
         li.appendChild(span)
