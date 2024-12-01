@@ -4,18 +4,7 @@ import * as bootstrap from 'bootstrap'
 const apiURL = 'https://js1-todo-api.vercel.app/api/todos'
 const apiKey = '47b35a3a-87c6-4fef-bdeb-a4cb2b91d23d'
 
-const addTodo = async (title) => {
-    await fetch(`${apiURL}?apikey=${apiKey}`,  {
-        method: 'POST',
-        body: JSON.stringify({
-            title
-        }),
-        headers: {
-            'Content-type': 'application/json;'
-        } 
-    })
-}
-
+// Get all todos from the API
 const getTodos = async () => {
     const url = `${apiURL}?apikey=${apiKey}` 
     let data = []
@@ -33,12 +22,27 @@ const getTodos = async () => {
     return data
 }
 
+// Post a title to create a todo item
+const addTodo = async (title) => {
+    await fetch(`${apiURL}?apikey=${apiKey}`,  {
+        method: 'POST',
+        body: JSON.stringify({
+            title
+        }),
+        headers: {
+            'Content-type': 'application/json;'
+        } 
+    })
+}
+
+// Delete an item from the API
 const deleteTodo = async (id) => {
     await fetch(`${apiURL}/${id}?apikey=${apiKey}`,  {
         method: 'DELETE',
     }) 
 }
 
+// Update an item to mark as completed or not
 const finishTodo =  async (id, completed) => {
     await fetch(`${apiURL}/${id}?apikey=${apiKey}`,  {
         method: 'PUT',
@@ -57,6 +61,8 @@ const openModal = () => {
     modalInstance.show()
 }
 
+// Create an li item with checkbox, title and delete button 
+// and insert each li to ul
 const renderTodoList = async ()  => {
     const todos = await getTodos()
     const ul = document.getElementById('todo-list')
@@ -97,6 +103,8 @@ const renderTodoList = async ()  => {
     })     
 }
 
+// On page load render the todo list 
+// and initialize form submit
 document.addEventListener('DOMContentLoaded', (event) => {
     const todoForm = document.getElementById('todo-form')
     renderTodoList() 
