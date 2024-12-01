@@ -79,7 +79,6 @@ const renderTodoList = async ()  => {
             document.getElementById(`todo-item-${item._id}`).style.textDecoration = e.target.checked ? 'line-through' : ''
             await finishTodo(item._id, e.target.checked) 
             renderTodoList()
-
         })
         button.classList.add('btn-close')
         button.classList.add('float-end')
@@ -90,7 +89,6 @@ const renderTodoList = async ()  => {
             } else {
                 openModal()
             }
-
         })
         li.appendChild(checkbox)
         li.appendChild(span)
@@ -114,7 +112,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
             alertMessage.classList.add('alert-warning')
             alertMessage.classList.remove('alert-success')
             alertMessageText.innerHTML = 'Please enter title'
- 
         } else {
             alertMessage.classList.add('alert-success')
             alertMessage.classList.remove('alert-warning')
